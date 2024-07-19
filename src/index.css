@@ -37,17 +37,17 @@ a {
 .home {
   min-height: 80vh;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   flex-wrap: wrap;
   padding: 1rem;
+  text-align: center;
 }
 
 .home .left {
   background-color: var(--bg-color);
   width: 100%;
   max-width: 620px;
-  text-align: center;
   padding: 30px;
   border-radius: 10px;
   border: 1px solid yellow;
@@ -199,6 +199,7 @@ a {
 @media (min-width: 768px) {
   .home {
     flex-direction: row;
+    text-align: left;
   }
 
   .home .left, .home .right {
