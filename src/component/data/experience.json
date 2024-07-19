@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "role": "Trainee Technical",
+    "organisation": "Sony",
+    "startDate": "Jul, 2022",
+    "endDate": "Oct, 2022",
+    "location": "New Delhi, IN",
+    "imageSrc": "company/google.png"
+  },
+  {
+    "id": 2,
+    "role": "Web Developer - Intern",
+    "organisation": "Tradezie Retails Pvt Ltd",
+    "startDate": "Sep, 2021",
+    "endDate": "Dec, 2021",
+    "location": "New Delhi, IN",
+    "imageSrc": "company/microsoft.png"
+  }
+]
