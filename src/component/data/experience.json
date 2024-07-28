@@ -1,8 +1,8 @@
 [
   {
     "id": 1,
-    "role": "Trainee Technical",
-    "organisation": "Sony",
+    "role": "Technical Support·Apprenticeship",
+    "organisation": "Sony India",
     "startDate": "Jul, 2022",
     "endDate": "Oct, 2022",
     "location": "New Delhi, IN",
@@ -10,10 +10,10 @@
   },
   {
     "id": 2,
-    "role": "Web Developer - Intern",
+    "role": "Web Developer",
     "organisation": "Tradezie Retails Pvt Ltd",
     "startDate": "Sep, 2021",
-    "endDate": "Dec, 2021",
+    "endDate": "Jul, 2022",
     "location": "New Delhi, IN",
     "imageSrc": "company/microsoft.png"
   }
