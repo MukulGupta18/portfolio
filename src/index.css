@@ -14,7 +14,6 @@ a {
 }
 
 /* Navbar Section */
-
 .nav_bar {
   display: flex;
   justify-content: space-between;
@@ -33,7 +32,6 @@ a {
 }
 
 /* Home Section */
-
 .home {
   min-height: 80vh;
   display: flex;
@@ -79,7 +77,6 @@ a {
 }
 
 /* Animation */
-
 @keyframes superman {
   0% {
     border-color: blue;
@@ -111,28 +108,32 @@ a {
 }
 
 /* Experience Section */
-
-.ex {
-  width: 100%;
-  max-width: 900px;
-  margin: auto;
-}
-
 .ex-items {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: var(--bg-color);
-  margin: 20px;
+  margin: 20px auto;
   padding: 30px;
   width: 100%;
   max-width: 600px;
   border-radius: 10px;
   border: 1px solid yellow;
   box-shadow: var(--box-shadow);
+  flex-direction: column; /* For better consistency */
+  text-align: center; /* To ensure consistent alignment */
 }
 
-/* Skills */
+@media (max-width: 768px) {
+  .ex-items {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin: 10px auto;
+  }
+}
+
+/* Skills Section */
 
 .skills {
   width: 100%;
@@ -148,22 +149,77 @@ a {
 }
 
 .skills .items .item {
-  width: 100%;
-  max-width: calc(33.33% - 40px);
-  background-color: black;
-  margin: 20px;
+  background-color: var(--bg-color);
+  margin: 10px; /* Adjusted margin for better spacing */
   text-align: center;
   padding: 20px;
   border-radius: 10px;
   border: 1px solid yellow;
   box-shadow: var(--box-shadow);
+  
+}
+
+/* Desktop and Tablet Layout */
+@media (min-width: 768px) {
+  .skills .items .item {
+    width: calc(33.33% - 20px); /* Three items per row with margin adjustments */
+  }
+}
+
+/* Mobile Layout */
+@media (max-width: 768px) {
+  .skills .items .item:nth-child(-n+3),
+  .skills .items .item:nth-child(n+4):nth-child(-n+6) {
+    width: calc(33.33% - 20px); /* 3 items per row */
+  }
+
+  .skills .items .item:nth-child(n+7) {
+    width: calc(50% - 20px); /* 2 items per row */
+  }
 }
 
 .skills .items .item img {
   width: 70px;
+  margin-bottom: 10px; /* Add space between the image and text */
 }
 
-/* Contact */
+/* Projects Section */
+
+.projects {
+  width: 100%;
+  max-width: 900px;
+  margin: auto;
+  padding: 1rem;
+  
+}
+
+.projects .items {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.projects .items .item {
+  background-color: var(--bg-color);
+  margin: 10px; /* Add spacing */
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid yellow;
+  box-shadow: var(--box-shadow);
+  text-align: center;
+}
+
+/* Mobile Layout */
+@media (max-width: 768px) {
+  .projects .items .item {
+    width: calc(100% - 40px); /* Full width minus margins */
+    margin: 10px auto; /* Centered horizontally */
+  }
+}
+
+
+/* Contact Section */
 
 .contact-icon {
   height: 30vh;
@@ -175,9 +231,9 @@ a {
 
 .contact-icon .items {
   background-color: black;
-  margin: 10px;
+  margin: 10px; /* Adjusted margin for better spacing */
   height: 70px;
-  width: 70px;
+  width: 70px; /* Fixed width and height */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -194,8 +250,30 @@ a {
   font-size: 2rem;
 }
 
-/* Media Queries */
+/* Mobile Layout */
+@media (max-width: 768px) {
+  .contact-icon .items {
+    width: calc(33.33% - 20px); /* Evenly distribute buttons */
+    max-width: 100px; /* Set a maximum width to prevent stretching */
+    flex: 1 1 auto; /* Allow the items to shrink or grow as needed */
+  }
 
+  .contact-icon .items:nth-child(n+4) {
+    width: calc(50% - 20px); /* Last 2 items on the second row */
+    max-width: 100px; /* Set a maximum width to prevent stretching */
+  }
+}
+
+/* Desktop and Tablet Layout */
+@media (min-width: 768px) {
+  .contact-icon .items {
+    width: calc(20% - 20px); /* Spreads the 5 items evenly */
+    max-width: 100px; /* Set a maximum width to prevent stretching */
+  }
+}
+
+
+/* General Media Queries */
 @media (min-width: 768px) {
   .home {
     flex-direction: row;
@@ -205,10 +283,6 @@ a {
   .home .left, .home .right {
     flex: 1;
     margin-bottom: 0;
-  }
-
-  .skills .items .item {
-    width: calc(33.33% - 40px);
   }
 }
 
@@ -230,9 +304,5 @@ a {
     flex-direction: column;
     align-items: flex-start;
     text-align: left;
-  }
-
-  .skills .items .item {
-    width: calc(100% - 40px);
   }
 }

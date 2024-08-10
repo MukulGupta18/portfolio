@@ -14,7 +14,7 @@ const Contact = () => {
         data-aos-duration="1000"
       >
         <a
-          href="https://www.instagram.com"
+          href="https://www.instagram.com/muku_18/"
           target="_blank"
           rel="noopener noreferrer"
           className="items"
@@ -22,7 +22,7 @@ const Contact = () => {
           <FaInstagram className="icons" />
         </a>
         <a
-          href="https://www.facebook.com"
+          href="https://www.facebook.com/profile.php?id=100017067750434"
           target="_blank"
           rel="noopener noreferrer"
           className="items"
@@ -46,7 +46,7 @@ const Contact = () => {
           <FaGithubSquare className="icons" />
         </a>
         <a
-          href="mailto:webdevmastery@gmail.com"
+          href="mailto:mgofficial20@gmail.com"
           target="_blank"
           rel="noopener noreferrer"
           className="items"
