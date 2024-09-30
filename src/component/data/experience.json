@@ -1,6 +1,15 @@
 [
   {
     "id": 1,
+    "role": "Software Developer · Intern",
+    "organisation": "PearlThoughts",
+    "startDate": "Aug, 2024",
+    "endDate": "Present",
+    "location": "Remote, IN",
+    "imageSrc": "company/google.png"
+  },
+  {
+    "id": 2,
     "role": "Technical Support · Apprenticeship",
     "organisation": "Sony India",
     "startDate": "Jul, 2022",
@@ -9,7 +18,7 @@
     "imageSrc": "company/google.png"
   },
   {
-    "id": 2,
+    "id": 3,
     "role": "Software Developer",
     "organisation": "Tradezie Retails Pvt Ltd",
     "startDate": "Sep, 2021",
