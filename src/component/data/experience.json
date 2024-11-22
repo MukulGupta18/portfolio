@@ -1,28 +1,20 @@
 [
   {
     "id": 1,
-    "role": "Software Developer · Intern",
+    "role": "Backend Developer · Intern",
     "organisation": "PearlThoughts",
     "startDate": "Aug, 2024",
-    "endDate": "Present",
+    "endDate": "Sep, 2024",
     "location": "Remote, IN",
     "imageSrc": "company/google.png"
   },
+
   {
     "id": 2,
-    "role": "Technical Support · Apprenticeship",
-    "organisation": "Sony India",
-    "startDate": "Jul, 2022",
-    "endDate": "Oct, 2022",
-    "location": "New Delhi, IN",
-    "imageSrc": "company/google.png"
-  },
-  {
-    "id": 3,
-    "role": "Software Developer",
+    "role": "Web Developer",
     "organisation": "Tradezie Retails Pvt Ltd",
     "startDate": "Sep, 2021",
-    "endDate": "Jul, 2022",
+    "endDate": "Sep, 2022",
     "location": "New Delhi, IN",
     "imageSrc": "company/microsoft.png"
   }
