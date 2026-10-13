@@ -1,60 +1,58 @@
 import React from "react";
-import { FaInstagram } from "react-icons/fa";
+import { FaInstagram, FaGithubSquare } from "react-icons/fa";
 import { CiFacebook, CiLinkedin } from "react-icons/ci";
-import { FaGithubSquare } from "react-icons/fa";
 import { SiGmail } from "react-icons/si";
+import TiltCard from "./TiltCard";
 
 const Contact = () => {
   return (
-    <div className="container contact" id="contact">
-      <h1>CONTACT ME</h1>
-      <div
-        className="contact-icon"
-        data-aos="zoom-in-up"
-        data-aos-duration="1000"
-      >
-        <a
-          href="https://www.instagram.com/muku_18/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="items"
-        >
-          <FaInstagram className="icons" />
-        </a>
-        <a
-          href="https://www.facebook.com/profile.php?id=100017067750434"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="items"
-        >
-          <CiFacebook className="icons" />
-        </a>
-        <a
-          href="https://www.linkedin.com/in/mukul-gupta-08b802180/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="items"
-        >
-          <CiLinkedin className="icons" />
-        </a>
-        <a
-          href="https://github.com/MukulGupta18"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="items"
-        >
-          <FaGithubSquare className="icons" />
-        </a>
-        <a
-          href="mailto:mgofficial20@gmail.com"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="items"
-        >
-          <SiGmail className="icons" />
-        </a>
-      </div>
-    </div>
+    <section className="section contact" id="contact">
+      <h2 className="section-title">Finish line</h2>
+      <p className="section-kicker">Say hello — next destination TBD</p>
+      <TiltCard className="finish-board">
+        <div className="contact-icon">
+          <a
+            href="https://www.instagram.com/muku_18/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="items"
+            aria-label="Instagram"
+          >
+            <FaInstagram />
+          </a>
+          <a
+            href="https://www.facebook.com/profile.php?id=100017067750434"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="items"
+            aria-label="Facebook"
+          >
+            <CiFacebook />
+          </a>
+          <a
+            href="https://www.linkedin.com/in/mukul-gupta-08b802180/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="items"
+            aria-label="LinkedIn"
+          >
+            <CiLinkedin />
+          </a>
+          <a
+            href="https://github.com/MukulGupta18"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="items"
+            aria-label="GitHub"
+          >
+            <FaGithubSquare />
+          </a>
+          <a href="mailto:mgofficial20@gmail.com" className="items" aria-label="Email">
+            <SiGmail />
+          </a>
+        </div>
+      </TiltCard>
+    </section>
   );
 };
 

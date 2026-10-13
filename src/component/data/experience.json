@@ -1,21 +1,37 @@
 [
   {
     "id": 1,
+    "role": "Software Engineer",
+    "organisation": "MetaDesign Solutions",
+    "startDate": "Mar, 2025",
+    "endDate": "Aug, 2026",
+    "location": "India",
+    "highlights": [
+      "Built and shipped production features across the stack for client-facing products",
+      "Worked with product and design to turn requirements into reliable UI and APIs",
+      "Improved code quality, performance, and delivery on live systems"
+    ]
+  },
+  {
+    "id": 2,
     "role": "Backend Developer · Intern",
     "organisation": "PearlThoughts",
     "startDate": "Aug, 2024",
     "endDate": "Sep, 2024",
     "location": "Remote, IN",
-    "imageSrc": "company/google.png"
+    "highlights": [
+      "Contributed to backend services and APIs in a remote engineering team"
+    ]
   },
-
   {
-    "id": 2,
+    "id": 3,
     "role": "Web Developer",
     "organisation": "Tradezie Retails Pvt Ltd",
     "startDate": "Sep, 2021",
     "endDate": "Sep, 2022",
     "location": "New Delhi, IN",
-    "imageSrc": "company/microsoft.png"
+    "highlights": [
+      "Developed and maintained web interfaces for retail operations"
+    ]
   }
 ]

@@ -2,47 +2,58 @@ import React, { useEffect, useRef } from "react";
 import pdf from "../pdf/resume.pdf";
 import hero from "./data/hero.json";
 import Typed from "typed.js";
+import TiltCard from "./TiltCard";
 
 const Home = () => {
   const typedRef = useRef(null);
 
   useEffect(() => {
-    const options = {
+    const typed = new Typed(typedRef.current, {
       strings: [
-        "Welcome to my profile",
-        "My Name is Mukul Gupta",
-        "I'm a full stack developer",
+        "Full stack developer",
+        "Software engineer · MetaDesign Solutions",
+        "Follow the bright road through my work",
       ],
-      typeSpeed: 50,
-      backSpeed: 50,
+      typeSpeed: 40,
+      backSpeed: 24,
+      backDelay: 1200,
       loop: true,
-    };
+    });
 
-    const typed = new Typed(typedRef.current, options);
-
-    return () => {
-      typed.destroy();
-    };
+    return () => typed.destroy();
   }, []);
 
   return (
-    <div className="container home" id="home">
-      <div className="left" data-aos="fade-up-right" data-aos-duration="1000">
-        <h1 ref={typedRef}>Welcome to my profile</h1>
-        <a
-          href={pdf}
-          download="Resume.pdf"
-          className="btn btn-outline-warning my-3"
-        >
-          Download Resume
-        </a>
-      </div>
-      <div className="right">
-        <div className="img" data-aos="fade-up-left" data-aos-duration="1000">
-          <img src={`/assets/${hero.imgSrc}`} alt="hero" />
+    <section className="home" id="home">
+      <div className="home-copy">
+        <p className="eyebrow">You are here · Pin 01</p>
+        <h1>
+          Mukul
+          <span> Gupta</span>
+        </h1>
+        <p className="typed-line">
+          <span ref={typedRef} />
+        </p>
+        <p className="lead">
+          A colorful 3D career map: school stops, job checkpoints, skill power-ups,
+          and project cities.
+        </p>
+        <div className="home-actions">
+          <a href={pdf} download="Resume.pdf" className="btn-primary-cta">
+            Grab resume
+          </a>
+          <a href="#experience" className="btn-ghost">
+            Start the route
+          </a>
         </div>
       </div>
-    </div>
+      <TiltCard className="hero-stage">
+        <div className="hero-3d">
+          <img src={`/assets/${hero.imgSrc}`} alt="Mukul Gupta" />
+          <div className="badge-3d">START</div>
+        </div>
+      </TiltCard>
+    </section>
   );
 };
 

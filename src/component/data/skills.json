@@ -1,34 +1,10 @@
 [
-  {
-    "title": "HTML",
-    "imageSrc": "skills/html.png"
-  },
-  {
-    "title": "CSS",
-    "imageSrc": "skills/css.png"
-  },
-  {
-    "title": "JavaSc..",
-    "imageSrc": "skills/javascript.png"
-  },
-  {
-    "title": "React",
-    "imageSrc": "skills/react.png"
-  },
-  {
-    "title": "Node",
-    "imageSrc": "skills/node.png"
-  },
-  {
-    "title":"Express",
-    "imageSrc":"skills/firebase.png"
-  },
-  {
-    "title": "MySql",
-    "imageSrc": "skills/graphql.png"
-  },
-  {
-    "title": "MongoDB",
-    "imageSrc": "skills/mongodb.png"
-  }
+  { "title": "HTML" },
+  { "title": "CSS" },
+  { "title": "JavaScript" },
+  { "title": "React" },
+  { "title": "Node.js" },
+  { "title": "Express" },
+  { "title": "MySQL" },
+  { "title": "MongoDB" }
 ]

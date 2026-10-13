@@ -1,46 +1,44 @@
 import React from "react";
 import experience from "./data/experience.json";
+import TiltCard from "./TiltCard";
+
+const tones = ["lime", "orange", "violet"];
 
 const Experience = () => {
+  const route = [...experience].reverse();
+
   return (
-    <>
-      <div className="container ex" id="experience">
-        <h1>EXPERIENCE</h1>
-        {experience.map((data) => {
-          return (
-            <>
-              <div
-                key={data.id}
-                className="ex-items text-center my-5"
-                data-aos="zoom-in"
-                data-aos-duration="1000"
-                style={{
-                  padding: "20px",
-                  borderRadius: "15px",
-                  backgroundColor: "#2a2a72",
-                  boxShadow: "0px 4px 15px rgba(0, 0, 0, 0.1)",
-                }}
-              >
-                <div className="right">
-                  <h2 style={{ marginBottom: "8px", fontSize: "1.5rem", color: "#fff" }}>
-                    {data.role}
-                  </h2>
-                  <h4 style={{ marginBottom: "12px", fontSize: "1.2rem", color: "#b0b0b0" }}>
-                    {data.organisation}
-                  </h4>
-                  <h5 style={{ marginBottom: "0", fontSize: "1rem", color: "#fff" }}>
-                    <span style={{ color: "yellowgreen" }}>
-                      {data.startDate} - {data.endDate}
-                    </span>{" "}
-                    <span style={{ color: "yellow" }}>{data.location}</span>
-                  </h5>
-                </div>
-              </div>
-            </>
-          );
-        })}
+    <section className="section" id="experience">
+      <h2 className="section-title">Career road</h2>
+      <p className="section-kicker">Drive from the first role to the latest stop</p>
+      <div className="road">
+        <div className="road-line" />
+        {route.map((data, index) => (
+          <article
+            className={`road-stop ${index % 2 === 0 ? "left" : "right"}`}
+            key={data.id}
+          >
+            <div className="milestone">
+              <span>{String(index + 4).padStart(2, "0")}</span>
+            </div>
+            <TiltCard className={`stop-card ${tones[index % tones.length]}`}>
+              <p className="ex-org">{data.organisation}</p>
+              <h2>{data.role}</h2>
+              <p className="ex-meta">
+                {data.startDate} — {data.endDate} · {data.location}
+              </p>
+              {data.highlights?.length > 0 && (
+                <ul>
+                  {data.highlights.map((item) => (
+                    <li key={item}>{item}</li>
+                  ))}
+                </ul>
+              )}
+            </TiltCard>
+          </article>
+        ))}
       </div>
-    </>
+    </section>
   );
 };
 

@@ -1,36 +1,25 @@
-import React from "react";
-import Navbar from "./component/Navbar";
-import Home from "./component/Home";
-import Experience from "./component/Experience";
-import Skills from "./component/Skills"
-import Project from "./component/Project"
-import Contact from "./component/Contact";
-import Education from "./component/Education";
-import Aos from "aos";
-import "aos/dist/aos.css"
-import { useEffect } from "react";
+﻿import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import About from "@/components/About";
+import Experience from "@/components/Experience";
+import Skills from "@/components/Skills";
+import Projects from "@/components/Projects";
+import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
 
-
-const App = () => {
- useEffect(() => {
-  Aos.init();
-  
- }, [])
-
-
+export default function App() {
   return (
     <>
       <Navbar />
-      <div className="container">
-        <Home />
-        <Education/>
+      <main className="overflow-x-clip">
+        <Hero />
+        <About />
         <Experience />
         <Skills />
-        <Project />
+        <Projects />
         <Contact />
-      </div>
+      </main>
+      <Footer />
     </>
   );
 }
-
-export default App;
