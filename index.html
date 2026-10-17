@@ -27,5 +27,140 @@
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+
+    <!-- ===== Chatbot widget (calls separate backend API — no repo merge) ===== -->
+    <div id="cb-root">
+      <button class="cb-launcher" id="cb-launcher" aria-label="Open chat">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="8" width="18" height="12" rx="3" /><path d="M12 8V4" />
+          <circle cx="12" cy="3" r="1" fill="currentColor" />
+          <circle cx="8.5" cy="14" r="1.2" fill="currentColor" /><circle cx="15.5" cy="14" r="1.2" fill="currentColor" />
+        </svg>
+      </button>
+      <div class="cb-panel" id="cb-panel">
+        <div class="cb-header">Chat Assistant</div>
+        <div class="cb-messages" id="cb-messages"></div>
+        <form class="cb-composer" id="cb-composer">
+          <input id="cb-input" type="text" placeholder="Type a message..." autocomplete="off" />
+          <button type="button" class="cb-mic" id="cb-mic" aria-label="Speak" title="Speak">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="2" width="6" height="12" rx="3" /><path d="M5 11a7 7 0 0 0 14 0" /><path d="M12 18v3" /><path d="M8 21h8" />
+            </svg>
+          </button>
+          <button type="submit" id="cb-send">Send</button>
+        </form>
+      </div>
+    </div>
+    <style>
+      #cb-root { --cb-accent:#4f46e5; --cb-accent-dark:#4338ca; }
+      .cb-launcher { position:fixed; right:24px; bottom:24px; width:60px; height:60px; border:none; border-radius:50%;
+        background:var(--cb-accent); color:#fff; cursor:pointer; display:flex; align-items:center; justify-content:center;
+        box-shadow:0 6px 20px rgba(79,70,229,.4); transition:transform .15s,background .15s; z-index:2147483000; }
+      .cb-launcher:hover { background:var(--cb-accent-dark); transform:translateY(-2px); }
+      .cb-launcher svg { width:30px; height:30px; }
+      .cb-panel { position:fixed; right:24px; bottom:96px; width:360px; max-width:calc(100vw - 32px); height:520px;
+        max-height:calc(100vh - 120px); background:#fff; border-radius:16px; box-shadow:0 12px 40px rgba(0,0,0,.18);
+        display:none; flex-direction:column; overflow:hidden; z-index:2147483000;
+        font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; color:#1a1a1f; }
+      .cb-panel.cb-open { display:flex; }
+      .cb-header { background:var(--cb-accent); color:#fff; padding:14px 16px; font-weight:600; font-size:15px; }
+      .cb-messages { flex:1; padding:16px; overflow-y:auto; display:flex; flex-direction:column; gap:10px; background:#fafafa; }
+      .cb-msg { max-width:80%; padding:9px 13px; border-radius:14px; font-size:14px; line-height:1.4; white-space:pre-wrap; word-wrap:break-word; }
+      .cb-msg.bot { align-self:flex-start; background:#f1f1f4; border-bottom-left-radius:4px; }
+      .cb-msg.user { align-self:flex-end; background:var(--cb-accent); color:#fff; border-bottom-right-radius:4px; }
+      .cb-msg.error { align-self:flex-start; background:#fdecec; color:#b42318; }
+      .cb-composer { display:flex; gap:8px; padding:12px; border-top:1px solid #eee; background:#fff; }
+      .cb-composer input { flex:1; border:1px solid #ddd; border-radius:10px; padding:10px 12px; font-size:14px; outline:none; }
+      .cb-composer input:focus { border-color:var(--cb-accent); }
+      .cb-composer #cb-send { border:none; background:var(--cb-accent); color:#fff; border-radius:10px; padding:0 16px; font-size:14px; font-weight:600; cursor:pointer; }
+      .cb-composer #cb-send:disabled { opacity:.5; cursor:default; }
+      .cb-mic { border:1px solid #ddd; background:#fff; color:var(--cb-accent); border-radius:10px; padding:0 11px; cursor:pointer; display:flex; align-items:center; justify-content:center; flex:0 0 auto; }
+      .cb-mic svg { width:18px; height:18px; } .cb-mic:hover { background:#f5f5f7; }
+      .cb-mic.cb-listening { background:var(--cb-accent); color:#fff; border-color:var(--cb-accent); animation:cb-pulse 1.2s ease-in-out infinite; }
+      @keyframes cb-pulse { 0%{box-shadow:0 0 0 0 rgba(79,70,229,.5);} 70%{box-shadow:0 0 0 8px rgba(79,70,229,0);} 100%{box-shadow:0 0 0 0 rgba(79,70,229,0);} }
+    </style>
+    <script>
+      (function () {
+        // Deployed backend (chatbot API). Keep the /api/chat suffix.
+        var API_URL = "https://chat-bot-gdmj.onrender.com/api/chat";
+
+        var launcher = document.getElementById("cb-launcher");
+        var panel = document.getElementById("cb-panel");
+        var messages = document.getElementById("cb-messages");
+        var form = document.getElementById("cb-composer");
+        var input = document.getElementById("cb-input");
+        var sendBtn = document.getElementById("cb-send");
+        var micBtn = document.getElementById("cb-mic");
+        var greeted = false;
+
+        function addMessage(type, text) {
+          var el = document.createElement("div");
+          el.className = "cb-msg " + type;
+          el.textContent = text;
+          messages.appendChild(el);
+          messages.scrollTop = messages.scrollHeight;
+          return el;
+        }
+
+        launcher.addEventListener("click", function () {
+          panel.classList.toggle("cb-open");
+          if (panel.classList.contains("cb-open")) {
+            input.focus();
+            if (!greeted) { addMessage("bot", "Hi! Ask me anything."); greeted = true; }
+          }
+        });
+
+        form.addEventListener("submit", async function (e) {
+          e.preventDefault();
+          var text = input.value.trim();
+          if (!text) return;
+          addMessage("user", text);
+          input.value = "";
+          sendBtn.disabled = true;
+          var thinking = addMessage("bot", "...");
+          try {
+            var res = await fetch(API_URL, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ message: text, bot: "portfolio" }),
+            });
+            var data = await res.json();
+            if (data && data.success) { thinking.textContent = data.reply; }
+            else { thinking.className = "cb-msg error"; thinking.textContent = (data && data.error) || "Something went wrong."; }
+          } catch (err) {
+            thinking.className = "cb-msg error";
+            thinking.textContent = "Could not reach the server. Please try again.";
+          } finally { sendBtn.disabled = false; input.focus(); }
+        });
+
+        // Voice input (Web Speech API) — Chrome/Edge, needs HTTPS (Netlify is fine).
+        var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SR) { micBtn.style.display = "none"; }
+        else {
+          var recognition = new SR();
+          recognition.lang = "en-US"; // or "en-IN" / "hi-IN"
+          recognition.interimResults = true;
+          recognition.continuous = false;
+          var listening = false;
+          micBtn.addEventListener("click", function () {
+            if (listening) { recognition.stop(); return; }
+            try { recognition.start(); } catch (err) {}
+          });
+          recognition.addEventListener("start", function () { listening = true; micBtn.classList.add("cb-listening"); input.placeholder = "Listening…"; });
+          recognition.addEventListener("result", function (event) {
+            var t = ""; for (var i = 0; i < event.results.length; i++) { t += event.results[i][0].transcript; }
+            input.value = t.trim();
+          });
+          recognition.addEventListener("error", function (event) {
+            if (event.error !== "aborted" && event.error !== "no-speech") { addMessage("error", "Microphone error: " + event.error); }
+          });
+          recognition.addEventListener("end", function () {
+            listening = false; micBtn.classList.remove("cb-listening"); input.placeholder = "Type a message...";
+            if (input.value.trim()) { form.requestSubmit(); }
+          });
+        }
+      })();
+    </script>
+    <!-- ===== End chatbot widget ===== -->
   </body>
 </html>
